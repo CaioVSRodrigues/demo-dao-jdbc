@@ -53,8 +53,35 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
     @Override
     public void update(Department obj) {
+        PreparedStatement st = null;
+        try {
+            if (obj == null) {
+                throw new IllegalArgumentException("Department object is null");
+            }
 
+            st = conn.prepareStatement(
+                    "UPDATE department " +
+                            "SET Name = ? " +
+                            "WHERE Id = ?");
+
+            st.setString(1, obj.getName());
+            st.setInt(2, obj.getId());
+
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new DbException("Update failed. Department with ID " + obj.getId() + " not found.");
+            }
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
     }
+
+
 
     @Override
     public void deleteById(Integer id) {
