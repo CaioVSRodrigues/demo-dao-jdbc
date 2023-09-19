@@ -14,12 +14,16 @@ public class Program2 {
 
         DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 
+        System.out.println("\n=== TEST 1: findById =======");
+        Department dep = departmentDao.findById(1);
+        System.out.println(dep);
+
        System.out.println("\n=== TEST 1: insert: ===");
        Department newdepartment = new Department(null, "Dance");
        departmentDao.insert(newdepartment);
        System.out.println("Inserted! New id = " + newdepartment.getId());
 
-        System.out.println("\n=== TEST 2: update =======");
+        System.out.println("\n=== TEST 3: update =======");
         Department dep2 = departmentDao.findById(1);
         dep2.setName("Food");
         departmentDao.update(dep2);
