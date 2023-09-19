@@ -1,5 +1,6 @@
 package app;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
 import model.entities.Department;
@@ -19,7 +20,7 @@ public class Program2 {
         Department dep = departmentDao.findById(1);
         System.out.println(dep);
 
-        System.out.println("\n=== TEST 2: findById =======");
+        System.out.println("\n=== TEST 2: findAll =======");
         List<Department> list = departmentDao.findAll();
             for(Department d : list){
                 System.out.println(d);
@@ -35,6 +36,12 @@ public class Program2 {
         dep2.setName("Food");
         departmentDao.update(dep2);
         System.out.println("Update completed");
+
+        System.out.println("\n=== TEST 5: delete =======");
+        System.out.println("Enter id for delete teste: ");
+            int id = read.nextInt();
+        departmentDao.deleteById(id);
+        System.out.println("Delete completed");
 
 
 
